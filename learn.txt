@@ -70,7 +70,7 @@ The compilation of a C program consists of four steps:
 
 Preprocessing: The preprocessor scans the source code to find preprocessor directive, which are any line with a # symbol, such as #include.
 Once the preprocessor finds these lines, it substitues them with something else.
-For exq;ple, when the preprocessor finds the line #include <stdio.h> , the #include tells the preprocessor to include all the code from the stdio.h header file.
+For example, when the preprocessor finds the line #include <stdio.h> , the #include tells the preprocessor to include all the code from the stdio.h header file.
 So,  it replace the #include <stdio.h> line with the actual contents of the stdio.h file.
 the output of this phase is a modified version of the source code.
 After the preprocessing, the next step is the compilation phase, where the modified source code gets translated into the corresponding assembly code.
@@ -80,7 +80,7 @@ The output of this phaes is an object file, which contains the machine code inst
 the last step is the linking phase.
 Linking is the process of combining the object file generated from the assembly phase with any necessary libraries to create the final executable binary file.
 To do all this things, we run the command gcc my-file.c on the terminal.
-The gcc part of the command refers to the C compiler, and ;y-file.c contains the C code that you want to compile.
+The gcc part of the command refers to the C compiler, and my-file.c contains the C code that you want to compile.
 After the compiler running and don't display any error, run the command ls on the terminal, you will see:
 a.out my-file.c
 we see the a.out file, this is the executable file containing the source code statements in their corresponding binary instructions.To run this file, enter the command 
