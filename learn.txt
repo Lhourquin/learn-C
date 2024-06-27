@@ -17,3 +17,9 @@ None and NULL are similar concepts but quite different(0 in C ?)
 Strings and character arrays are similar consepts by *very* different
 C has no list, or dict
 Python has no struct - float in Python is C double
+source : https://www.youtube.com/watch?v=PaPN51Mm5qQ
+==================================================================================================================================
+
+What are the header files ? 
+
+in the first line we have #include <stdio.h> , the include part is a prprocessor command that tells the C compiler to include file. It tells the compiler ton include the stio.h header file. Header files are external libraries, this mean that some developers have written somme functionality and features taht are not included at the core of the C language. By adding header files to your code, you get addional functionality tat you can use in your programs without having to write the code from scratch. The stio.h header file stands for standard input-output. It contains function definition for input and output operations, such as functions for gathering user data and printing data to the console. Specifically, it provides functions such as printf() and scanf(). So this line (#include <stdio.h>) is necessary to use printf() or scanf() functionm if we don't include this stdio header file at the top of the code, the compiler return error and cannot understand what the printf()/scanf() function is.
