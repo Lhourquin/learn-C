@@ -46,3 +46,12 @@ What is the printf() function in C ?
 Inside the function body, the line printf("Hello, Wolrd !\n"); prints the text Hello, World! to the console (this text is also know as a string).
 Whenever you want to display anything, use the the printf() function.
 In C, the semicolon ';' terminates the statement. All statements need to end with semicolon, as it identifies the end of the statement. Semicolon in C is similar to how full stop/period ends a sentence.
+
+What are escape sequence in C ?
+
+the \n at the end of printf("Hello, World! \n"); it's called an escape sequence, which means that is a character that create a newline and tells the cursor to move to the next line when it sees it.
+In programming, an escape sequence is a combination of characters that represents a special character within a string.
+They provide a way to include special chatacter that are difficult to represent irectly in a string.
+They consist of a backslash, also known as the escape character, followed by one or more additional characters.
+The escape sequence for a newline character is \n.
+For instance, another escape seauence is \t. The \t represents a tab character, and will insert a space within a string.
