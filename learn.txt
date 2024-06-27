@@ -55,3 +55,41 @@ They provide a way to include special chatacter that are difficult to represent 
 They consist of a backslash, also known as the escape character, followed by one or more additional characters.
 The escape sequence for a newline character is \n.
 For instance, another escape seauence is \t. The \t represents a tab character, and will insert a space within a string.
+
+How to compile and run C program ?
+
+Any code we write in C is called source code.
+The computer does'nt understand any of the C statements we have written, so the source code need to be translated to machine code with a compiler. 
+The compiler will read the program and translate it into format closer to the computer's native language and make the program suitable for exection.
+We will be able to see the output of the program after the compilation.
+The compilation of a C program consists of four steps: 
+- Preprocessing
+- Conpilation
+- Assembling
+- Linking.
+
+Preprocessing: The preprocessor scans the source code to find preprocessor directive, which are any line with a # symbol, such as #include.
+Once the preprocessor finds these lines, it substitues them with something else.
+For exq;ple, when the preprocessor finds the line #include <stdio.h> , the #include tells the preprocessor to include all the code from the stdio.h header file.
+So,  it replace the #include <stdio.h> line with the actual contents of the stdio.h file.
+the output of this phase is a modified version of the source code.
+After the preprocessing, the next step is the compilation phase, where the modified source code gets translated into the corresponding assembly code.
+If there are any errors, compilation will fail, and you need to fix them to continue.
+The next step is the assembly phase, where the assembler converts the generated assembly code statements into machine code instructions.
+The output of this phaes is an object file, which contains the machine code instructions.
+the last step is the linking phase.
+Linking is the process of combining the object file generated from the assembly phase with any necessary libraries to create the final executable binary file.
+To do all this things, we run the command gcc my-file.c on the terminal.
+The gcc part of the command refers to the C compiler, and ;y-file.c contains the C code that you want to compile.
+After the compiler running and don't display any error, run the command ls on the terminal, you will see:
+a.out my-file.c
+we see the a.out file, this is the executable file containing the source code statements in their corresponding binary instructions.To run this file, enter the command 
+./a.out
+This command tells the computer to look in the current directory ' ./ ' for a file named a.out
+We also have the option to name the executable file instead of leaving it with the default a.out name. Like this:
+gcc -o theNameIWantToGive my-file.c
+This command with the -o option (which stands for output) tells the gcc compiler to create an executable file named theNameIWantToGive
+to run the new executabe file, just enter:
+./theNameIWantToGive
+NOTE: Whenever you make change in your source code file, you have to repeat the process of compiling and running your program from the beggining to see the changes you made.
+
