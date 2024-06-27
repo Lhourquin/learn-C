@@ -39,4 +39,10 @@ The int keyword in int main() {} indicates the return value of main() function.
 In this case, the function will return an integer number.
 And the void keyword inside the main() function indicates that the function receives no arguments.
 Anythings inside the curly braces,{}, in considred the body of the functionm here is where we include the code we want to write.Any code written here will allways run first.
-This line acts as a boilerplate and starting point for all C programs. It lets the computer know where to begin reading the code when exectes your programs.
+This line acts as a boilerplate and starting point for all C programs. It lets the computer know where to begin reading the code when exectes your programs. 
+
+What is the printf() function in C ?
+
+Inside the function body, the line printf("Hello, Wolrd !\n"); prints the text Hello, World! to the console (this text is also know as a string).
+Whenever you want to display anything, use the the printf() function.
+In C, the semicolon ';' terminates the statement. All statements need to end with semicolon, as it identifies the end of the statement. Semicolon in C is similar to how full stop/period ends a sentence.
