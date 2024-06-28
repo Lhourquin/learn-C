@@ -28,7 +28,7 @@ Header files are external libraries, this mean that some developers have written
 By adding header files to your code, you get addional functionality tat you can use in your programs without having to write the code from scratch. 
 The stio.h header file stands for standard input-output. It contains function definition for input and output operations, such as functions for gathering user data and printing data to the console. 
 Specifically, it provides functions such as printf() and scanf(). 
-So this line (#include <stdio.h>) is necessary to use printf() or scanf() functionm if we don't include this stdio header file at the top of the code, the compiler return error and cannot understand what the printf()/scanf() function is.
+Sg this line (#include <stdio.h>) is necessary to use printf() or scanf() functionm if we don't include this stdio header file at the top of the code, the compiler return error and cannot understand what the printf()/scanf() function is.
 
 What are the main() function in C ?
 
