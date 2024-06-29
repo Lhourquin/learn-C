@@ -10,14 +10,14 @@ int main(void){
 	char letter[2] = "";//good practice, init the variable with a value even if it change later.
 
 	//sometime we hear the scanf is not a good method to scan keybord data because is not safe, and it is true, but, that's not mean you cannot use it at all
-	//just use it for the good purpose, C is a low level language, so we could be serious in the code and use apropriate method to do what we want for the use cqse.
+	//just use it for the good purpose, C is a low level language, so we should be serious in the code and use apropriate method to do what we want for the use cqse.
 	printf("Enter the letter you want.");
 	scanf("%c", letter);
 	printf("How old are you ?\n");
 	scanf("%d", &age_user);
 	/*
 	   First step, we specify what it wait, numer ? string ? char ? for this, we use the appropriate flag, for example, if the type of data await is number, we use %d.
-	   Because we have more than one character, we could use the double quote ' "" ' .
+	   Because we have more than one character, we should use the double quote ' "" ' .
 
 	   To store the new value, we need to use the adress where the value of age_user is stored, for that we the symbol ' & ',
 	   if we write age_user instead &age_user , we give in argument only the value, which is 0 now, but it's not that we want, 
