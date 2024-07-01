@@ -30,8 +30,9 @@ int main(void){
 	}
 	//switch case
 	/*
-	  here switch state is more useful when we need to test the value of variable or constant
-	  so before using expression in switch we need to pre processing the value to test,
+	  here switch state is more useful when we need to test the value of variable or constant,
+	  so before using expression in switch we need to pre processing the value to test,(that's mean we cannot use operator in case condition)
+	  as we saw earlier, with if else condition (in the case where the value use in switch need condition to be processed before initialize)
 	  and store this value in variable, and after that use it for the switch statement.
 	*/
 	printf("switch statement:\t");
