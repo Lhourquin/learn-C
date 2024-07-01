@@ -21,4 +21,5 @@ int main(void){
 		printf("BOUM\n %d\n", i);
 	}
 	return 0;	
+	//break can be use also in loop
 }
