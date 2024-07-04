@@ -12,6 +12,7 @@
    An header file defines a bunch of prototypes and constants that exist outside of your program.
    In stdio's case, it stands for "Standard Input/Output" and defines things like printf, scqnf, etc.
    These method are define like printf, scanf etc are define in this file.
+	When we use the #include directive, this add the source code with their prototype of function we use on the program, to puts the code at the place we add the #include <myheaderfile.h>
 source: https://www.reddit.com/r/learnprogramming/comments/tnl0m4/what_is_the_stdioh_file_in_c_programs
  */
 /*

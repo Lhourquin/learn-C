@@ -16,7 +16,7 @@ int main(void){
 	printf("How old are you ?\n");
 	scanf("%d", &age_user);
 	/*
-	   First step, we specify what it wait, numer ? string ? char ? for this, we use the appropriate flag, for example, if the type of data await is number, we use %d.
+	   First step, we specify what it wait, number ? string ? char ? for this, we use the appropriate flag, for example, if the type of data await is number, we use %d.
 	   Because we have more than one character, we should use the double quote ' "" ' .
 
 	   To store the new value, we need to use the adress where the value of age_user is stored, for that we the symbol ' & ',
