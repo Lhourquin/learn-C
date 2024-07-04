@@ -10,11 +10,15 @@
 	gcc main.c air.c -o main
 	the commend above say "compile main.c and air.c and make exec file called main to execute all the code"
 */
+int global_number;//to get access of the variable global from air.c, i declare here the variable, the variable from air. give to this the value 57
+int static_number;
 int main(int argc,const char *argv[]){
 	double result;
 	result = air_rectangle(5, 10);
 	printf(" \nWINKY\n");
 	printf("Rectangle de largeur 5 et de haueur 10. Aire = %f\n", result);
+printf("%d print global_number from main.c\n", global_number);//57 like in the air.c because is global for all file
+	printf("print the static_number form main.c %d\n", static_number);//0 because is declared here like a variable global for this file, the value of 58 stay in air.c because it static.
 	return 0;
 }
 
