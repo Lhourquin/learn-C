@@ -39,7 +39,10 @@ printf("%d print global_number from main.c\n", global_number);//57 like in the a
 	printf("increment number, because I use static keyword in function, the local variable it doesn't destory %d\n", increment());
 	printf("increment number, because I use static keyword in function, the local variable it doesn't destory %d\n", increment());
 
-	
+	//try to use display_something outside increment.c
+//	display_something("Stranger Thing");
+	//that give us an error because the static declaration means the function is avalaible only for the file where is declared, to use this function outside increment.h, we need to remove static keyword.
+
 	return 0;
 }
 
