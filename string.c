@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 /*
 
@@ -7,6 +8,7 @@
 	This is what will see in this course. 
 	
 */
+char* concat(char str[],char str_copy[]);
 int main(void){
 /*
 	use the type char to store character
@@ -47,5 +49,64 @@ int main(void){
 	//but there is a flaw (there always flaw.. 🤖) that don't work at the initialiization only, when we have declared before
 	//exemple: another_string_without_curly_brackets = "qwerty";//don't work
 	printf("%s\n", another_string_without_curly_brackets);//print qwerty
+
+	//get string from scanf	
+	char name[100];
+	printf("what's your name ?");
+	scanf("%s", name);
+	printf("Hi %s, i'm happy to meet you !\n",name);
+	//get the lenght of the string
+	printf("length of your name is %lu \n", strlen(name));
+	//copy string 	
+	char copy_name[100];
+	printf("copy_name before %s\n", copy_name);
+	strcpy(copy_name, name);
+	printf("copy_name after %s\n", copy_name);
+	//compare string
+    int is_true = strcmp(copy_name, name);
+	printf("%d\n", is_true);
+	//concat string
+	strcat(copy_name, name);
+	printf("%s\n", copy_name);
+
+    char result[100];
+    concat(name, copy_name);
+    printf("%s\n",name);
+	//search char in string
+	char sentence[100] = "A simple sentence to test strchr function";//already a pointer because it start at the char 'A'
+	char *two_last_word_of_sentence = NULL;// new pointer because we get a part of this string in sentence, so we get the adresse of the char inside sentence
+	char *word_after_simple = NULL;
+	word_after_simple = strchr(sentence, 'e');
+	two_last_word_of_sentence = strrchr(sentence, 's');// to find the last s char used in the string
+	if(two_last_word_of_sentence != NULL && word_after_simple != NULL){
+		printf("The two last word of sentence is %s\n", two_last_word_of_sentence);
+		printf("The words after simple is %s\n", 	word_after_simple);
+	}
+	//find the first string include the char i want
+	char *get_rest_of_sentence = NULL;
+
+	get_rest_of_sentence = strpbrk(	two_last_word_of_sentence, "qwzto" );//return the rest of sentence when he find last char match one char of this arguments, here it's t sor the result will be "trchr function"
+	printf(" sentence is: %s\n",	sentence );
+	printf(" rest of sentence with qwzto argument is: %s\n",	get_rest_of_sentence );
+	//search string in string
+	char *rest_of_sentence_after_string_founded = NULL;		
+	rest_of_sentence_after_string_founded = strstr(sentence, "test");
+	if(rest_of_sentence_after_string_founded != NULL){	
+		printf("string founded in sentence is: %s\n", rest_of_sentence_after_string_founded);
+	}
+	//write string with sprintf
+	char new_string[100] = "TEST TEST TEST";//As I want to initialize it afterwards I must not add NULL herem otherwise i get this error : string.c:98:7: error: array initializer must be an initializer list or string literal
+
+	int age = 56;
+	printf("Before new initialization, new_string = %s\n", new_string);
+	sprintf(new_string, "The string I wrote, and the number I want to add in the sentence %d", age);
+	printf("My new_string variable contains: %s\n and I added to it the number or the variable age: %d\n", new_string, age);
+	
 	return 0;
+}
+
+char* concat(char str[],char str_copy[]){
+    char new_copy[strlen(str) + 1];//length of the string + 1 for the \0
+    //§char string_concat[100] = strcpy(str, str_copy);//https://stackoverflow.com/questions/44356121/why-am-i-getting-array-initializer-must-be-an-initializer-list-or-string-litera
+    return strcat(str, str_copy);
 }
