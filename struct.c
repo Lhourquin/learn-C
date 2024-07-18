@@ -65,7 +65,6 @@ int main(void){
 	Not limit of variable if we want to add variable in structure to complete him.
 */	
 
-
 /*
 
 	struct Person user;
