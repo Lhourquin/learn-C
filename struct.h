@@ -19,4 +19,9 @@ struct Another_coordinates{
 	int x;
 	int y;
 };
+
+typedef struct Player Player;
+struct Player{
+	char name[100];
+};
 #endif
