@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+#define MAX_SIZE 1000
 /*
 	Variable exist only on the memory (RAM)
 	once the program is finsih, the variable is destroy,
@@ -29,6 +31,10 @@ int main(void){
 	Is necessary to get the pointer to be able to read and write in the file.
 	
 */
+	char city[100] = "";
+	char name[100] = "";
+	int age = 0;
+	char string[MAX_SIZE] = "";
 	FILE *file = NULL;//it is fundamental to initialize a pointer to NULL if we don't have a value to give.
 	//Is not necessary to use struct keyword, the developers of stio.h made that for us, with a typedef.
 	//the shape of this structure can change from OS to another,  that will not contains the same sub variables in all.
@@ -75,9 +81,6 @@ int main(void){
 	
 */
 	if(file != NULL){//we can read/write on the file
-		char city[100];
-		char name[100];
-		int age = 0;
 		puts("file opened");
 		//fclose(file);//when we have finish to work with a file, we closed it. The role of this function is to freeing the memory after we finish to work with.
 /*
@@ -139,14 +142,30 @@ int main(void){
 			actual_character = fgetc(file);
 			printf("%c", actual_character);
 		}while(actual_character != EOF);
-			
+		actual_character = fgetc(file);
+		printf("All char is read%d\n",actual_character);//output -1 because EOF
+		//fgets 
+		rewind(file);//if we don't make rewind, the cursor is at the end and will not read the string
+		fgets(string, MAX_SIZE, file);//take 3 parametters: the char array (string), the size of array, and the pointer of file output waited: HELLO WORLD (but, we will use just after the function, so the string varaible will be re initialized)
+	//	fgets(string, MAX_SIZE, file);//now string = GOODBY
+		//but if we create new variable to store the next line, we always have HELLO WORLD in string, and fgets will pass to the next line/string on the file
+		char another_string[MAX_SIZE] = "";
+		fgets(another_string, MAX_SIZE, file);
+		//fgets read one line only and stop when they reach the limit of char we specify in MAX_SIZE, and read the next line then is re called
 		
-	
+		printf("string: %s\n", string);
+		printf("another_string: %s\n", another_string);
+		//Using #define MAX_SIZE here is very useful, because if we notice the size is too small for the string or for the fgets function, we have just to change the value of MAX_SIZE ! and not need to find where is it and manually change that, the preprocessor will doing that for us.
+		rewind(file);
+		char content_of_file[MAX_SIZE] = "";
+		// if we want to read all string of file, we need to make a loop ! The fgets function return NULL if they don't find string.
+		do{
+			printf("%s\n", content_of_file);
+		//}while(content_of_file != NULL);//not correct ! the compiler return this warning message: warning: comparison of array 'content_of_file' not equal to a null pointer is always true [-Wtautological-pointer-compare], so, that will trigger infinite loop !! 
+		}while(fgets(content_of_file, MAX_SIZE, file) != NULL);//this is correct, because the comparaison is from the result of this function, not the result of the content_of_file string. So this line mean: iterate and call fgets function to read the line of the iteration, and when you have NULL instead line/string, stop the loop!
 		fclose(file);
 	}else{//we cannot read and write in the file
-		puts("file not opened");
-		int error_response = fclose(file);
-		printf("error fclose response: %d", error_response);
+		perror("Failed to open the file");
 	}
 
 	
