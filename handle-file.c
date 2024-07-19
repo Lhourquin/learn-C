@@ -51,7 +51,7 @@ int main(void){
 
 
 */
-	file = fopen("file.txt", "w+");//open a file to read and write in it. the pointer file will be a pointer on file.txt
+	file = fopen("file.txt", "r");//open a file to read and write in it. the pointer file will be a pointer on file.txt
 /*
 	Where should be file.txt ? 
 	
@@ -104,6 +104,7 @@ int main(void){
 				* fprintf: write a formated string in file.
 		*/
 		//fputc
+/*
 		printf("What's your name ?");
 		scanf("%s", name);
 		fprintf(file,"Your name is %s\n", name);
@@ -113,6 +114,34 @@ int main(void){
 		puts("Where are you from ?");
 		scanf("%s", city);
 		fprintf(file,"You're from %s\n", city);
+		fclose(file);
+*/
+		//write on a file
+		/*
+			To write on a file we will see three method
+			It's litle bit like previous method to write on a file.
+				* fgtec: read one character		
+				* fgets: read a string
+				* fprintf: read a formated string
+		*/
+		//read one character with fgetc
+		int first_char = fgetc(file);//when we use fgetc, the cursor pass to the next after it read the char
+		int second_char = fgetc(file);//so without specify what char we want, it will automatically read the second char, not the first because is already read.
+		printf("first_char: %c\n", first_char);//H
+		printf("first_char: %c\n", second_char);//E
+		
+
+		int actual_character = 0;
+		//If we make the loop, the output will be LLO WORLD, because we have called the function fgetc two times before
+		//So if we want to have in outpput HELLO WOLRD, we should rewind the cursor at the begin. To do this, we can use two function: rewind(), fseek()
+		rewind(file);
+		do{
+			actual_character = fgetc(file);
+			printf("%c", actual_character);
+		}while(actual_character != EOF);
+			
+		
+	
 		fclose(file);
 	}else{//we cannot read and write in the file
 		puts("file not opened");
