@@ -26,7 +26,9 @@ int main(void){
 	   in resume, to get the value of the variable/adress, 
 	   we write only age_user, and in this case, we want to store the new value enter by user, so,
 	   to get target the addres, we write &age_user ( ?????????? ).
-	   The only case when we don't use the & is for char type, will see that later.
+	   ❌The only case when we don't use the & is for char type, will see that later. ❌
+		Correction: scanf will take an address, so for array of (string) and other type of array, they already return the adress of the first elem, so we don't need to use the & symbol to specify we want the address, but for only one charm or int, we should use it.
+		
 
 	   If we don't use the ' &' we have this error : warning: format specifies type 'int *' but the argument has type 'int' [-Wformat] , 	
 	   because when we use only age_user without the & before, it's just the value, not the adress where is stored in memory. (?????????)
