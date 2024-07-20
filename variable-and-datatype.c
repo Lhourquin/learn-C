@@ -2,6 +2,11 @@
 #include <string.h>
 
 int main(void){
+	printf("size of int: %lu\n", sizeof(int));
+	printf("size of long: %lu\n", sizeof(long));
+	printf("size of double: %lu\n", sizeof(double));
+	printf("size of char: %lu\n", sizeof(char));
+	
 	//a good practice consist of make declaration of all variable at top of the function, and initialize it with a default value.
 	//declaration of variable type int, depending on the computer, the int type will use 2 or 4 bytes.
 	int area_of_square = 0;//will be stored in address like 0xF5000DA for instance. the area_of_square is like an alias for the address.
@@ -40,3 +45,4 @@ int main(void){
 	volatile int another_number = 10;//unlike register instruction, volatile indicates precisely that data does not be stored in register and only on the RAM. that useful earlier to but now, it also the compiler that manage that for us the most of time. It is mostly used for peripheric like keyboard or mouse cquse if we used register to manage it, it can triggers issue and cause some bug, the result can be to be impossible to use these peripheric, for instance the mouse. But now the comppiler and OS manage that automaticaly.
 
 	//another tips: do not hesitate to give explicit name to variable, earlier when computer was not powerful, it is useful to name variable with the less word as possible to save the capital of memory, but now we don't have this problem and we can name variable with a long name to be explicit for us and other developer.
+}
