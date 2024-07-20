@@ -33,8 +33,12 @@ int main(void){
 */
 	char city[100] = "";
 	char name[100] = "";
-	int age = 0;
 	char string[MAX_SIZE] = "";
+	
+	int actual_character = 0;
+	int age = 0;
+	int score[3] = {0};
+
 	FILE *file = NULL;//it is fundamental to initialize a pointer to NULL if we don't have a value to give.
 	//Is not necessary to use struct keyword, the developers of stio.h made that for us, with a typedef.
 	//the shape of this structure can change from OS to another,  that will not contains the same sub variables in all.
@@ -57,7 +61,7 @@ int main(void){
 
 
 */
-	file = fopen("file.txt", "r");//open a file to read and write in it. the pointer file will be a pointer on file.txt
+	file = fopen("file.md", "r+");//open a file to read and write in it. the pointer file will be a pointer on file.txt
 /*
 	Where should be file.txt ? 
 	
@@ -107,7 +111,7 @@ int main(void){
 				* fprintf: write a formated string in file.
 		*/
 		//fputc
-/*
+
 		printf("What's your name ?");
 		scanf("%s", name);
 		fprintf(file,"Your name is %s\n", name);
@@ -118,7 +122,7 @@ int main(void){
 		scanf("%s", city);
 		fprintf(file,"You're from %s\n", city);
 		fclose(file);
-*/
+
 		//write on a file
 		/*
 			To write on a file we will see three method
@@ -127,20 +131,29 @@ int main(void){
 				* fgets: read a string
 				* fprintf: read a formated string
 		*/
+		//read formated string
+		double cursor_pos = ftell(file);
+		fscanf(file, "%d %d %d", &score[0], &score[1], &score[2]);
+		//if is not on the top and I use only like that, it is doesn't work, the output woll be 0 0 0 and is not what is in me file, because fscanf read the first line they found ? 
+		printf("the best score are: %d, %d and %d.\n", score[0], score[1], score[2]);
+		
+		rewind(file);
 		//read one character with fgetc
 		int first_char = fgetc(file);//when we use fgetc, the cursor pass to the next after it read the char
 		int second_char = fgetc(file);//so without specify what char we want, it will automatically read the second char, not the first because is already read.
 		printf("first_char: %c\n", first_char);//H
 		printf("first_char: %c\n", second_char);//E
 		
+		printf("%.f\n", cursor_pos);
 
-		int actual_character = 0;
 		//If we make the loop, the output will be LLO WORLD, because we have called the function fgetc two times before
 		//So if we want to have in outpput HELLO WOLRD, we should rewind the cursor at the begin. To do this, we can use two function: rewind(), fseek()
-		rewind(file);
+		rewind(file);//bring the cursor at the beggining of the file
+		printf("%.f\n", cursor_pos);
 		do{
 			actual_character = fgetc(file);
 			printf("%c", actual_character);
+//			printf("%.f\n", cursor_pos);//note, the result is always 0
 		}while(actual_character != EOF);
 		actual_character = fgetc(file);
 		printf("All char is read%d\n",actual_character);//output -1 because EOF
@@ -153,17 +166,37 @@ int main(void){
 		fgets(another_string, MAX_SIZE, file);
 		//fgets read one line only and stop when they reach the limit of char we specify in MAX_SIZE, and read the next line then is re called
 		
-		printf("string: %s\n", string);
-		printf("another_string: %s\n", another_string);
+	//	printf("string: %s\n", string);
+	//	printf("another_string: %s\n", another_string);
 		//Using #define MAX_SIZE here is very useful, because if we notice the size is too small for the string or for the fgets function, we have just to change the value of MAX_SIZE ! and not need to find where is it and manually change that, the preprocessor will doing that for us.
 		rewind(file);
 		char content_of_file[MAX_SIZE] = "";
 		// if we want to read all string of file, we need to make a loop ! The fgets function return NULL if they don't find string.
 		do{
-			printf("%s\n", content_of_file);
+		//	printf("%s\n", content_of_file);
 		//}while(content_of_file != NULL);//not correct ! the compiler return this warning message: warning: comparison of array 'content_of_file' not equal to a null pointer is always true [-Wtautological-pointer-compare], so, that will trigger infinite loop !! 
 		}while(fgets(content_of_file, MAX_SIZE, file) != NULL);//this is correct, because the comparaison is from the result of this function, not the result of the content_of_file string. So this line mean: iterate and call fgets function to read the line of the iteration, and when you have NULL instead line/string, stop the loop!
+	
+		//mode cursor on file
+		/*
+			function to move and know the position of the cursor:
+				* ftell: indicate the current position of the cursor in the file
+				* fseek: positionate the cursor in a specific position in the file
+				* rewind: bring the cursor at the beggining of the file (equivalent to use fseek to potisionate at the begin)
+				
+		*/
+		
+		rewind(file);
+		cursor_pos = ftell(file);
+		printf("cursor_pos: %.f\n", cursor_pos);
+		fseek(file, -3, SEEK_END);
+		cursor_pos = ftell(file);
+		printf("cursor_pos: %.f\n", cursor_pos);
+		int character_current = fgetc(file);
+		printf("character_current: %c\n",character_current);//output D
 		fclose(file);
+		rename("file.txt", "file.md");
+		
 	}else{//we cannot read and write in the file
 		perror("Failed to open the file");
 	}
@@ -171,4 +204,11 @@ int main(void){
 	
 	return 0;
 }
-
+/*
+		Conclusion:
+			* standard library provide some function to handle file, so don't forget to include <stdio.h>, and <stdlib.h>
+			* fopen open a file, with a mode to specify to interact with them (read, write, both of them etc. according to our needs.)
+			* functions fputc fputs and fprintf allows to write on the file
+			* functions fgetc fgets and fscanf allows to read the content of the file
+			* always close the file after we done working with it, by using fclose to avoid memory leak.
+*/
