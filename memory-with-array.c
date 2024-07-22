@@ -49,10 +49,20 @@ int main(void){
 		printf("number_of_friends: %d\n", number_of_friends);
 		printf("Friends_informations struct size: %lu\n", sizeof(Friends_informations));//output 104
 		size_t total_size = number_of_friends * sizeof(Friends_informations);
-		printf("Size taking to store friend: %d\n", total_size);
+		printf("Size taking to store friend: %zu\n", total_size);
 		free(friends);//freeing memory
 	}
 
 	
 	return 0;
 }
+
+/*
+	Conclusion:
+	
+		* a Variable take more or less space in memory depending on this type	
+		* we can know this number of bytes will take with sizeof() function
+		* dynamic allocation consist of reserved manually a place in memory for a variable or a an array
+		* the allocation of memory is made by malloc() and we did never forget to freeing them with free() as soon we no longer need it
+		* the dynamic allocation allows to create an array who the size is determined by a variable at the execution.
+*/
