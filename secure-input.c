@@ -214,3 +214,12 @@ void clear_buffer(void){
 		printf("c: %c\n", c);
 	}
 }
+
+/*
+	Conclusion:
+		* scanf is limited, we cannot write severals words at once esealy
+		* the buffer overflow occurs when we exceeds the allocated memory reserved, for instance when we specify 5 case in memory for a string but the users enter a string with 10 of length
+		* to avoid this issue, we can use fgets function, they will avoid the buffer overflow by stop reading when they reach the limit
+		* avoid to use gets because they don't have these behavior (to avoid buffer overflow like fgets)
+		* we can write our own function to use fgets and clear the buffer, or manage some potential issue with the "enter" etc.
+*/
