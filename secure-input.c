@@ -3,7 +3,8 @@
 #include <string.h>
 //int read_str(char *string, int str_len,FILE *pt_stdin);
 int read_str(char *string, int str_len);
-int read_char(char *character, FILE *pt);
+int read_char(char *character, FILE *pt, int length);
+void clear_buffer(void);
 /*
 	sucure input:
 	
@@ -23,8 +24,8 @@ int main(void){
 	let see the limit with two concrete example.
 */
 	//example 1:
-	char name[20] = {0};
 /*
+	char name[20] = {0};
 	printf("What's your name ?");
 	scanf("%s", name);//in the example the output will be Kalu Thebest
 	printf("Your name is %s\n", name);
@@ -104,28 +105,79 @@ int main(void){
 		* the same pointer of *str if the function worked without error
 		* NULL if we have an error
 */
-	printf("Do you want to play a game with me ?");
-	char user_response;
+/*
+	printf("Do you want to play a game with me ?(y/n)");
+	char user_response = fgetc(stdin);
+*/
 /*
 	When we hit the keycaps "Enter" fgets keeps the '\n' corresponding to the hit of the keycaps "Enter"
 	We can see that on the terminal because we have an aunderline after what we have enter in input.
 	There's nothing we can do to stop fgets from writing the \n character, but nothing stops us from creating our own input function that will call fgets and automatically remove the \n character every time!
 */
+	//char user_string[4] = {0};
 	//without function
+	//if(user_response != '\n'){
+	//	if(user_response == 'y'){
+	//		fgetc(stdin);//consume the  \n to avoid fgets take it and pass the input for user_string
+	//		puts("Enter your name with 3 characters");
+	//		read_str(user_string, 4);
+	//		printf("You enter %s\n", user_string);
+		//}else{
+		//	exit(0);
+		//}
+	//}
+	//puts("Good Bye.");
 /*
-	if(user_response != '\n'){
-		fgetc(stdin);//consume the  \n to avoid fgets take it and pass the input for user_string
-	}
-*/
-	read_char(&user_response, stdin);
-	printf("Your response is %c\n", user_response);		
-	//example fgets()
-	char user_string[4] = {0};
-	puts("Enter your name with 3 characters");
-	//fgets(user_string, 4, stdin);
+	BUFFER
 
-	read_str(user_string, 4);
-	printf("You enter %s\n", user_string);
+	fgets function is secure, so when we write a text more longer than specify, it stop to read at the limit of length planned.
+	for example:
+*/
+	char name[10] = "";
+	puts("What is your name ?");
+	read_str(name, 10);//if we put Jean Edouard Albert 1er will "Jean Edou" (length of 10 so it take 9 char and the last char will replaced by \0) the rest will not display and not stored in name.
+
+	//clear_buffer();	
+	printf("name: %s\n", name);//output Jean Edou instead of Jean Edouard Albert 1er enter by user
+	puts("What is your name ?");
+	read_str(name, 10);///if we put Jean Edouard Albert 1er will "Jean Edou" (length of 10 so it take 9 char and the last char will replaced by \0) the rest will not display and not stored in name.
+	printf("name: %s\n", name);//output Jean Edou instead of Jean Edouard Albert 1er enter by user
+/*
+	The problem, the rest of the string who cannot be read, as know "ard Albert 1er" will not disapear: 
+	is stay in BUFFER.
+	
+	The "buffer" is a memory zone who receive directly input from keyboard who serves as an intermediary,
+	between the keyboard and the array to store data input.
+
+	In C, we have the pointer to the "buffer": stdin
+	
+	explanation step by step:
+		* the use write this string on the keyboard
+		* this string is tranfered by the operating system to the buffer stdin
+		* the function fgets() tranmit this string in the memory zone and remove what they read of the buffer.
+	
+	When the user write text on keyboard, the operating system copy directly the text writing on the buffer "stdin".
+	The buffer is here to receiver temporary the input from keyboard.
+	
+	the role of the function fgets() is to extract from the buffer character in it, 
+	and copy them in the memory zone indicate, our array name.
+	
+	Then after the copy is done, fgets remove from the buffer everithing it may have copy.
+	
+	If everything went well, fgets was able to copy the entire buffer into your string, 
+	and then the buffer will be empty at the end of execution of the fgets() function.
+	BUt, if the user enter more characted than planned, and the function fgets can copy only one part of them,
+	only read character will be remove from the "buffer". All of these don't read part stay it on the buffer !
+	
+	This is why if we re call the function after, is the previous input was too long, 
+	the rest of the string will be take by fgets because is always on buffer.
+	so by this, we cannot write anything because fgets will take the rest of the last input stay in buffer.	
+	
+	So fgets protect us to the buffer overflow, but traces always remain in the buffer if there are too many
+
+	we should improve that by creating a function to handle that
+*/
+	
 	return 0;
 }
 
@@ -138,34 +190,27 @@ void read(char *string, int str_len,FILE *pt_stdin){
 }
 */
 
-int read_char(char *character, FILE *pt){
-	*character = fgetc(pt);
-	printf("character: %c\n", *character);
-	char user_input[3] = "";
-	char *pt_extra = NULL;
-	if(fgets(user_input, 3, stdin) != NULL){
-		printf("user_input: %s\n", user_input);
-		puts("too long");
-		exit(0);
-	}
-	if(*character != '\n'){
-		printf("character: %c\n", character);
-		fgetc(pt);
-		return 1;
-	}else{
-		return 0;
-	}
-}
 int read_str(char *string, int length){
-	char *cursor_pos = NULL;//declare the pointer to receive the address of the char we want to capture (in our case is \n)
+	char *input_pos = NULL;//declare the pointer to receive the address of the char we want to capture (in our case is \n)
 	//read the text enter on keyboard
 	if(fgets(string, length, stdin) != NULL){//check if we don't have an error and read input directly
-		cursor_pos = strchr(string, '\n');//search the "Enter" char, and add the address of \n char
-		if(cursor_pos != NULL){
-			*cursor_pos	= '\0';//at the address, replace the value \n by \0, like this we avoid to fgets to write \n
+		input_pos = strchr(string, '\n');//search the "Enter" char, and add the address of \n char
+		if(input_pos != NULL){
+			*input_pos	= '\0';//at the address, replace the value \n by \0, like this we avoid to fgets to write \n
+		}else{
+			clear_buffer();
 		}
 		return 1;//no error
 	}else{
+		clear_buffer();
 		return 0;//we have error, the result of fgets is NULL
+	}
+}
+
+void clear_buffer(void){
+	int tmp = 0;
+	while(c != '\n' && c != EOF){
+		tmp = getchar();//temp variable to receive char from the buffer until we encounter \n or EOF
+		printf("c: %c\n", c);
 	}
 }
