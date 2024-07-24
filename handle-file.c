@@ -128,6 +128,8 @@ int main(void){
 			To write on a file we will see three method
 			It's litle bit like previous method to write on a file.
 				* fgtec: read one character		
+					prototype: int fgetc(FILE* pt_file);
+						- return EOF (-1) if error
 				* fgets: read a string
 				* fprintf: read a formated string
 		*/
