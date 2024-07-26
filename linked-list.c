@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "linked-list.h"
 /*
 	the problem with array: there are immutable,	
 	we cannot enlarge or chnage the size after this creation,
@@ -24,7 +24,24 @@
 	Contrary of array, the elements of a linked list are not placed side by side in memory.
 	Each case pointed to another case in memory, who is not necessary stored right to them.
 */
+List *initialization(void);
 
 int main(void){
+	List *my_list = initialization();
 	return 0;
+}
+
+List *initialization(void){
+	List *list = malloc(sizeof(*list));
+	Element *element = malloc(sizeof(*element));
+
+	if(list == NULL || element == NULL){
+		exit(EXIT_FAILURE);
+	} 
+
+	element->number = 0;
+	element->next = NULL;
+	list->first = element;
+
+	return list;
 }
