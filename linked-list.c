@@ -25,9 +25,25 @@
 	Each case pointed to another case in memory, who is not necessary stored right to them.
 */
 List *initialization(void);
+void insertion(List *list, int new_number);
 
 int main(void){
 	List *my_list = initialization();
+	puts("before insertion");
+	printf("%d\n", my_list->first->number);
+	insertion(my_list, 5);
+	puts("after insertion");
+	printf("%d\n", my_list->first->number);
+	puts("second asserttion");
+	insertion(my_list, 15);
+	printf("%d\n", my_list->first->number);
+	puts("next element, output sould be 5 ?");
+	puts("last asserttion");
+	insertion(my_list, 35);
+	printf("%d\n", my_list->first->number);
+	puts("next element, output sould be 15 ?");
+	printf("%d\n", *my_list->first->next);
+	
 	return 0;
 }
 
@@ -45,3 +61,16 @@ List *initialization(void){
 
 	return list;
 }
+
+void insertion(List *list, int new_number){
+	Element *new_elem = malloc(sizeof(*new_elem));
+	
+	if(list == NULL || new_elem == NULL){
+		exit(EXIT_FAILURE);
+	}
+	new_elem->number = new_number;
+	new_elem->next = list->first;
+	list->first = new_elem;
+}
+
+
