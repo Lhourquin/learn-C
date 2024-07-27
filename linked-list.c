@@ -34,15 +34,17 @@ int main(void){
 	insertion(my_list, 5);
 	puts("after insertion");
 	printf("%d\n", my_list->first->number);
-	puts("second asserttion");
+	puts("second insertion");
 	insertion(my_list, 15);
 	printf("%d\n", my_list->first->number);
-	puts("next element, output sould be 5 ?");
-	puts("last asserttion");
+	puts("next element, output should be 5 ?");
+	printf("%d\n", *my_list->first->next);
+	puts("last insertion");
 	insertion(my_list, 35);
 	printf("%d\n", my_list->first->number);
-	puts("next element, output sould be 15 ?");
+	puts("next element, output should be 15 ?");
 	printf("%d\n", *my_list->first->next);
+	free(my_list);
 	
 	return 0;
 }
