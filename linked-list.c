@@ -26,6 +26,7 @@
 */
 List *initialization(void);
 void insertion(List *list, int new_number);
+void remove_in_list(List *list);
 
 int main(void){
 	List *my_list = initialization();
@@ -44,35 +45,51 @@ int main(void){
 	printf("%d\n", my_list->first->number);
 	puts("next element, output should be 15 ?");
 	printf("%d\n", *my_list->first->next);
+	puts("first element now");
+	printf("%d\n", my_list->first->number);
+	remove_in_list(my_list);
+	puts("remove first element, the first number is replaced by 15");
+	printf("%d\n", my_list->first->number);
 	free(my_list);
 	
 	return 0;
 }
 
 List *initialization(void){
-	List *list = malloc(sizeof(*list));
-	Element *element = malloc(sizeof(*element));
+	List *list = malloc(sizeof(*list));//allowed memeory to list who attempt to store element
+	Element *element = malloc(sizeof(*element));//element with number for the value and next for the pointer
 
 	if(list == NULL || element == NULL){
 		exit(EXIT_FAILURE);
 	} 
 
-	element->number = 0;
+	element->number = 0;//initalize value for number
 	element->next = NULL;
-	list->first = element;
+	list->first = element;//first = {int number, Element *next}
 
 	return list;
 }
 
 void insertion(List *list, int new_number){
-	Element *new_elem = malloc(sizeof(*new_elem));
+	Element *new_elem = malloc(sizeof(*new_elem));//allowed memory to add new element
 	
 	if(list == NULL || new_elem == NULL){
 		exit(EXIT_FAILURE);
 	}
-	new_elem->number = new_number;
-	new_elem->next = list->first;
-	list->first = new_elem;
+	new_elem->number = new_number;//new value for number of list (my_list->first->number)
+	new_elem->next = list->first;//pointer to next value (NULL by default)
+	list->first = new_elem;//new element on the list
 }
 
+void remove_in_list(List *list){
+	if(list == NULL){
+		exit(EXIT_FAILURE);
+	}
+
+	if(list->first != NULL){
+		Element *to_remove = list->first;//value need to freeing in memory
+		list->first = list->first->next;//next value swapped to the first removed
+		free(to_remove);//free memory for the previous first value no longer need
+	}
+}
 
