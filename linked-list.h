@@ -9,7 +9,7 @@ struct Element{//will be element of the list
 
 typedef struct List List;
 struct List{//the list who have element
-	Element *first;
+	Element *prime_number;
 };
 
 #endif
