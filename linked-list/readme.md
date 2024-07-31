@@ -2,7 +2,8 @@
 
 ### English 
 <details>
-	<summary>🇬</summary>
+	<summary>🇬🇧</summary>
+
 ## What is Linked List ?
 
 Is a linear data structure in which the elements are not stored in contingus memory locations and each element is connected only to its next element using a pointer.
@@ -34,7 +35,8 @@ In an arrays, each case are contigus, stored in memory area side by sidem fro in
 
 </details>
 <details>
-	<summary>🇫</summary>
+	<summary>🇫🇷</summary>
+
 ## C'est quoi une liste chainée ?
 
 C'est une structure de donnée linéaire dans laquelle les éléments ne sont pas stocker les unes à la suite des autres en mémoire, chacun des élément de cette liste sont connecter uniquement via un pointeur qui pointe vers cet élément suivant dans la liste.
