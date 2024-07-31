@@ -7,11 +7,11 @@
 
 Is a linear data structure in which the elements are not stored in contingus memory locations and each element is connected only to its next element using a pointer.
 
-[Singly Linked List. source: https://www.geeksforgeeks.org/introduction-to-singly-linked-list/](img/Singly-Linked-List.webp)
+![Singly Linked List. source: https://www.geeksforgeeks.org/introduction-to-singly-linked-list/](img/Singly-Linked-List.png)
 
 Linked List forms a series of connected nodes, where each node stores the data and the address of the next node.
 
-[Singly Linked List Form: source: https://www.geeksforgeeks.org/what-is-linked-list/](img/Single-linked-list-forms.png)
+![Singly Linked List Form: source: https://www.geeksforgeeks.org/what-is-linked-list/](img/Single-linked-list-forms.png)
 
 Node Structure: A node in a linked list typically consists of two composnents:
 	* **Data**: It holds the actual value or data associated with the node
@@ -39,11 +39,11 @@ In an arrays, each case are contigus, stored in memory area side by sidem fro in
 
 C'est une structure de donnée linéaire dans laquelle les éléments ne sont pas stocker les unes à la suite des autres en mémoire, chacun des élément de cette liste sont connecter uniquement via un pointeur qui pointe vers cet élément suivant dans la liste.
 
-[Singly Linked List. source: https://www.geeksforgeeks.org/introduction-to-singly-linked-list/](img/Singly-Linked-List.webp)
+![Singly Linked List. source: https://www.geeksforgeeks.org/introduction-to-singly-linked-list/](img/Singly-Linked-List.png)
 
 La liste chainée forme une série de noeuds, ou chacun de ses noeuds contiens la donnée et l'adresse du noeud suivant.
 
-[Singly Linked List Form: source: https://www.geeksforgeeks.org/what-is-linked-list/](img/Single-linked-list-forms.png)
+![Singly Linked List Form: source: https://www.geeksforgeeks.org/what-is-linked-list/](img/Single-linked-list-forms.png)
 
 Structure d'un noeud: Un noeurd dans une liste chainée et composé de deux partie:
 	* **Partie données**: Cette partie contient la valeur actuel ou les données associée à ce noeud.
