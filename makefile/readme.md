@@ -30,3 +30,117 @@ For instance, if we have a `makefile` called `bejo`, then the command we use to 
 ```
 make -f bejo
 ```
+
+## Structure of `Makefile`
+
+A `makefile` is composed by sections:
+* target
+* dependencies
+* rules
+
+The dependencies are elements where the source code is needed to create a target. The target is commonly a name of executable or object file. The rules are the necessary commands to create the target.
+
+A simple smple description of make file:
+```
+target: dependencies
+		command
+		command
+		...
+```
+
+## Example of `Makefile`
+
+```
+1 client: conn.o 
+2	g++ client.cpp conn.o -o client
+# dependencies to create the target conn.o
+3 conn.o: conn.cpp conn.h 
+# rules to create the target conn.o
+4	g++ -c conn.cpp -o conn.o 
+```
+
+In this `makefile` above, the dependencies are in the `conn.o`, and the rules in the line with `g++ client.cpp conn.o -o client`. Notice which each lines of rules start by tabulation, not by spaces. Forgive tabulation at the begin of the line of rules are a common error when we build makefiles. Fortunately, this kind of errors are easy to see because the make program will tell to us.
+
+Detailed description of `makefile` above:
+* Create a exectuable file called `client` as target, who depend of the file `conn.o`
+* The rules allows to create the target are in the third line
+* In the third line, to create the target conn.o. The `make` program need files `conn.cpp` and `conn.h`
+* The rules allowing to create the target `conn.o` are in the fourth line
+
+## Comments
+
+To add comments in the `makefile`, put # symbol in the first line commented.
+
+Example:
+```
+# Create a executable file "client" 
+1 client: conn.o
+2	g++ client.cppp conn.o -o client
+# Create object file "conn.o"
+3 conn.o: conn.cpp conn.h
+4	g++ conn.cpp -o conn.o
+```
+
+## Specific target (*phony target*)
+
+A specific target (phony target) is just a name of fictionnal file for command will be executed when we lanch an explicit request. We have two reasons to use a phony target:
+* To avoid conflict with a file who have the same name
+* To improve the performance of `makefile`
+
+If you write rules where the command is not supposed to create a target file, these command will be excuted for each re-execution of the target. For instance:
+```
+clean: 
+	rm *.o temp
+```
+Due to the fact the command `rm` don't create file named `clean` this file will never exist. The command `rm` is always executed each time we write:
+```
+make clean
+```
+Because `make` assumes that the clean file is always new.
+
+The target below stop working if a file named `clean` exist in the actual directory. As it does not require dependencies, the `clean` file will be considered like is up to date, and the `rm *.o temp` command will not be executed. To resolve this issue, you can declared explicitly a target is "specific" with the help of the command `.PHONY`. For instance:
+```
+.PHONY : clean
+```
+In the `makefile` above, we indicate the instruction `make clean` on the command line, the command `rm *.o temp` will be always executed, even if the file named `clean` exist or not in the directory.
+
+## Variable
+
+To define a variable in `makefile`, we can use the following command:
+```
+$VAR_NAME=value
+```
+
+By convention, a variable name is writing in majuscule, for instance:
+```
+$OBJECTS=main.o test.o
+```
+
+To get the value of a variable, put the symbol `$` before the variable as follows:
+```
+$(VAR_NAME)
+```
+
+In a `makefile`, we found two type of variables:
+* recursively extended variable
+* simply extended variable
+
+In a recursively extended variable, `make` will continue to extend this variable until it cannot be extended, for instance:
+```
+TOPDIR=/home/tedi/project
+SRCDIR=$(TOPDIR)/src
+```
+The variable *SRCDIR* will be extended, at first by extended the variable *TOPDIR* The final result is `/home/tedi/project/src`
+But the recursively extended variable will not be suitable for this following command:
+```
+CC = gcc -o
+CC = $(CC) -02
+```
+Using the recursevly extended variable in this case will cause an infinite loop. To avoid this, we can use simple extended variable instead:
+```
+CC := gcc -o
+CC += $(CC) -02
+```
+The symbol `:=` create the variable *CC* and is aaigned this value `gcc -o`. The symbol `+=` is placed at the end of the value `-02` of *CC*
+
+source: https://ftp.traduc.org/doc-vf/gazette-linux/html/2002/083/lg83-B.html
